@@ -1,6 +1,6 @@
 # @tegor/tang-cli
 
-[![NPM version](https://img.shields.io/npm/v/tang-cli?color=a1b858&label=)](https://www.npmjs.com/package/tang-cli)
+[![NPM version](https://img.shields.io/npm/v/@tegor/tang-cli?color=a1b858&label=)](https://www.npmjs.com/package/@tegor/tang-cli)
 
 ## Install
 
