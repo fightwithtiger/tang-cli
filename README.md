@@ -1,13 +1,13 @@
-# tang-cli
+# @tegor/tang-cli
 
 [![NPM version](https://img.shields.io/npm/v/tang-cli?color=a1b858&label=)](https://www.npmjs.com/package/tang-cli)
 
 ## Install
 
 ```bash
-npm install tang-cli -g
-yarn add tang-cli -g
-pnpm install tang-cli -g
+npm install @tegor/tang-cli -g
+yarn add @tegor/tang-cli -g
+pnpm install @tegor/tang-cli -g
 ```
 ## Command
 
