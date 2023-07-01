@@ -9,7 +9,7 @@ export function run() {
 
     program
       .name('tang-cli')
-      .description('CLI to some JavaScript string utilities')
+      .description('CLI to lay flat and touch fish')
       .version(config.version)
 
     program.command('create')
