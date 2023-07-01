@@ -1,0 +1,4 @@
+{
+  "extends": ["@tegor"],
+  "ignorePatterns": ["node_modules/", "dist/", "bin/"]
+}
