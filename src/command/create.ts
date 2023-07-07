@@ -2,6 +2,7 @@ import path from 'path'
 import fs from 'fs-extra'
 import select from '@inquirer/select'
 import type { CreateCommandOptions, CreateTemplateProps, CreateTemplateType } from '../types'
+import { CreatePrimaryTemplateEnum, CreateSecondaryTemplateEnum } from '../types'
 import { createDirSync, execCommand, removeFileSync } from '../utils'
 import { getConfig } from '../config'
 
@@ -42,8 +43,9 @@ async function askProjectType() {
   const answer = await select({
     message: '创建项目类型',
     choices: [
-      { name: 'web项目vite+vue', value: 'web' },
-      { name: '库开发模板', value: 'library' },
+      { name: 'web项目模板', value: CreatePrimaryTemplateEnum.WEB },
+      { name: '库开发模板', value: CreatePrimaryTemplateEnum.LIBRARY },
+      { name: '工具开发模板', value: CreatePrimaryTemplateEnum.TOOL },
     ],
   })
   return answer
@@ -53,7 +55,7 @@ async function askWebType() {
   const answer = await select({
     message: '请选择web项目模板',
     choices: [
-      { name: 'Vite+Vue', value: 'vite-template' },
+      { name: 'Vite+Vue', value: CreateSecondaryTemplateEnum.VITE_TEMPLATE },
     ],
   })
   return answer
@@ -63,9 +65,19 @@ async function askLibraryType() {
   const answer = await select({
     message: '使用ts还是js',
     choices: [
-      { name: 'Typescript', value: 'starterts' },
-      { name: 'Typescript + monorepo', value: 'mono' },
-      { name: 'Javascript', value: 'starterjs' },
+      { name: 'Typescript', value: CreateSecondaryTemplateEnum.STARTER_tS },
+      { name: 'Typescript + monorepo', value: CreateSecondaryTemplateEnum.MONO },
+      { name: 'Javascript', value: CreateSecondaryTemplateEnum.STARTER_JS },
+    ],
+  })
+  return answer
+}
+
+async function askToolType() {
+  const answer = await select({
+    message: '请选择工具项目模板',
+    choices: [
+      { name: 'vscode插件开发模板', value: CreateSecondaryTemplateEnum.STARTER_VSCODE },
     ],
   })
   return answer
@@ -73,10 +85,12 @@ async function askLibraryType() {
 
 async function createTemplate(props: CreateTemplateProps) {
   const { projectType } = props
-  if (projectType === 'web') {
+  if (projectType === CreatePrimaryTemplateEnum.WEB) {
     initWebTemplate(props)
-  } else if (projectType === 'library') {
+  } else if (projectType === CreatePrimaryTemplateEnum.LIBRARY) {
     initLibraryTemplate(props)
+  } else if (projectType === CreatePrimaryTemplateEnum.TOOL) {
+    initToolTemplate(props)
   }
 }
 
@@ -93,5 +107,10 @@ async function initWebTemplate(props: CreateTemplateProps) {
 
 async function initLibraryTemplate(props: CreateTemplateProps) {
   const answer = await askLibraryType() as CreateTemplateType
+  await initTemplate({ ...props, projectType: answer })
+}
+
+async function initToolTemplate(props: CreateTemplateProps) {
+  const answer = await askToolType() as CreateTemplateType
   await initTemplate({ ...props, projectType: answer })
 }

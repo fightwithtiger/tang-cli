@@ -1,4 +1,4 @@
-import type { GlobalConfig } from './types'
+import { CreateSecondaryTemplateEnum, type GlobalConfig } from './types'
 import { getPackageJSON } from './utils'
 
 let config: GlobalConfig | undefined
@@ -12,10 +12,11 @@ export function getConfig() {
   config = {
     version: pkg.version,
     repoPath: {
-      'vite-template': 'https://github.com/fightwithtiger/vite-template.git',
-      'starterts': 'https://github.com/fightwithtiger/starterts.git',
-      'starterjs': 'https://github.com/fightwithtiger/starterjs.git',
-      'mono': 'https://github.com/fightwithtiger/mono.git',
+      [CreateSecondaryTemplateEnum.VITE_TEMPLATE]: 'https://github.com/fightwithtiger/vite-template.git',
+      [CreateSecondaryTemplateEnum.STARTER_tS]: 'https://github.com/fightwithtiger/starterts.git',
+      [CreateSecondaryTemplateEnum.STARTER_JS]: 'https://github.com/fightwithtiger/starterjs.git',
+      [CreateSecondaryTemplateEnum.MONO]: 'https://github.com/fightwithtiger/mono.git',
+      [CreateSecondaryTemplateEnum.STARTER_VSCODE]: 'https://github.com/fightwithtiger/starter-vscode.git',
     },
   }
 
