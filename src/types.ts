@@ -3,6 +3,10 @@ export interface GlobalConfig {
   repoPath: Record<string, string>
 }
 
+export interface CheckDirOptions {
+  force?: boolean
+}
+
 export interface CreateCommandOptions {
   force?: boolean
 }

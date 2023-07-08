@@ -15,6 +15,12 @@ export function getPackageJSON(): any {
   }
 }
 
+export function getTargetPath(path: string) {
+  const cwd = process.cwd()
+  const targetPath = join(cwd, path)
+  return targetPath
+}
+
 export function createDirSync(targetDir: string) {
   fs.mkdirSync(targetDir)
 }

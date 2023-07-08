@@ -4,6 +4,7 @@
     "module": "esnext",
     "lib": ["esnext"],
     "moduleResolution": "node",
+    "isolatedModules": true,
     "esModuleInterop": true,
     "strict": true,
     "strictNullChecks": true,
