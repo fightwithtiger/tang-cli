@@ -1,7 +1,9 @@
+import { sep } from 'path'
 import select from '@inquirer/select'
+import color from 'picocolors'
 import type { CreateTemplateProps, CreateTemplateType } from '../types'
 import { CreatePrimaryTemplateEnum, CreateSecondaryTemplateEnum } from '../types'
-import { createDirSync, execCommand } from '../utils'
+import { execCommand, removeFileSync } from '../utils'
 import { getConfig } from '../config'
 
 const templateMap: Partial<Record<CreateTemplateType, string>> = getConfig().repoPath
@@ -51,8 +53,16 @@ async function initToolTemplate(props: CreateTemplateProps) {
 
 async function initTemplate(props: CreateTemplateProps) {
   const { projectName, targetDir, projectType } = props
-  createDirSync(targetDir)
-  await execCommand(`cd ${projectName} && npx degit ${templateMap[projectType]}`)
+  await execCommand(`git clone ${templateMap[projectType]} ${targetDir}`)
+  removeFileSync(`${targetDir}${sep}.git`)
+  // eslint-disable-next-line no-console
+  console.log(`${color.green('Created template Success')}`)
+  // eslint-disable-next-line no-console
+  console.log('\nPlease run the following command\n')
+  // eslint-disable-next-line no-console
+  console.log(`\tcd ${projectName}`)
+  // eslint-disable-next-line no-console
+  console.log('\tpnpm install')
 }
 
 async function askWebType() {
